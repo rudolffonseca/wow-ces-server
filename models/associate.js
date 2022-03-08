@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Associate.hasOne(models.Access_level, { foreignKey: "access_level" });
-      Associate.belongsTo(models.Ticket, { foreignKey: "associate_id" });
+      Associate.hasMany(models.Ticket);
     }
   }
   Associate.init(

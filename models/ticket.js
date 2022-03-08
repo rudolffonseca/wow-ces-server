@@ -9,12 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Ticket.hasOne(models.Customer, { foreignKey: "customer_id" });
-      Ticket.hasOne(models.Product, { foreignKey: "product_id" });
-      Ticket.hasOne(models.Topic, { foreignKey: "topic_id" });
-      Ticket.hasOne(models.Associate, { foreignKey: "associate_id" });
-      Ticket.hasOne(models.Status, { foreignKey: "status_id" });
-      Ticket.hasMany(models.Message, { foreignKey: "ticket_id" });
+      Ticket.belongsTo(models.Customer, { foreignKey: "customer_id" });
+      Ticket.belongsTo(models.Product, { foreignKey: "product_id" });
+      Ticket.belongsTo(models.Topic, { foreignKey: "topic_id" });
+      Ticket.belongsTo(models.Associate, { foreignKey: "associate_id" });
+      Ticket.belongsTo(models.Status, { foreignKey: "status_id" });
+      Ticket.hasMany(models.Message);
     }
   }
   Ticket.init(
