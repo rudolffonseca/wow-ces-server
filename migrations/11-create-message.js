@@ -9,7 +9,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       message: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       ticket_id: {
         type: Sequelize.INTEGER,
@@ -26,10 +26,12 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
+        defaultValue: new Date(),
       },
     });
   },

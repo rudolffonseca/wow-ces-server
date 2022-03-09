@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Message.init(
     {
-      message: DataTypes.STRING,
+      message: DataTypes.TEXT,
       read: DataTypes.BOOLEAN,
     },
     {

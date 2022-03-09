@@ -12,6 +12,20 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        {
+          customer_id: 2,
+          product_id: 2,
+          topic_id: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          customer_id: 2,
+          product_id: 1,
+          topic_id: 2,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
       ],
       {}
     );

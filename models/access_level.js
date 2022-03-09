@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Access_level.belongsTo(models.Associate);
+      Access_level.hasMany(models.Associate, { foreignKey: "access_level" });
     }
   }
   Access_level.init(

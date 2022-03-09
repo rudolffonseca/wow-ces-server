@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Ticket.belongsTo(models.Topic, { foreignKey: "topic_id" });
       Ticket.belongsTo(models.Associate, { foreignKey: "associate_id" });
       Ticket.belongsTo(models.Status, { foreignKey: "status_id" });
-      Ticket.hasMany(models.Message);
+      Ticket.hasMany(models.Message, { foreignKey: "ticket_id" });
     }
   }
   Ticket.init(
