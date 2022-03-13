@@ -13,6 +13,18 @@ const typeDefs = gql`
     updatedAt: Date
   }
 
+  type SignUpPayload {
+    name: String
+    email: String
+    country_id: ID
+    password: String
+  }
+
+  type AuthPayload {
+    token: String
+    customer: Customer
+  }
+
   type Customer {
     id: ID!
     name: String
@@ -43,7 +55,7 @@ const typeDefs = gql`
 
   type Message {
     id: ID
-    message: String
+    message: String!
     read: Boolean
     Ticket: Ticket
     createdAt: Date
@@ -98,6 +110,16 @@ const typeDefs = gql`
     topics: [Topic]
     status: [Status]
     tickets: [Ticket]
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): AuthPayload
+    signup(
+      name: String!
+      email: String!
+      country_id: ID!
+      password: String!
+    ): SignUpPayload
   }
 `;
 

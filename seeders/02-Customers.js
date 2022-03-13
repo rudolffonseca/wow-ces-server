@@ -1,4 +1,6 @@
-"use strict";
+("use strict");
+const bcrypt = require("bcrypt");
+const { SALT_ROUNDS } = require("../config/constants");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -9,6 +11,7 @@ module.exports = {
           name: "Mary Jane",
           email: "mj@mj",
           country_id: 1,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -16,6 +19,7 @@ module.exports = {
           name: "John Doe",
           email: "jd@jd",
           country_id: 2,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -23,6 +27,7 @@ module.exports = {
           name: "Thelma Carter",
           email: "tc@tc",
           country_id: 3,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -30,6 +35,7 @@ module.exports = {
           name: "Carl Sagan",
           email: "cs@cs",
           country_id: 4,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -37,6 +43,7 @@ module.exports = {
           name: "Cora Coralina",
           email: "cc@cc",
           country_id: 4,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -44,6 +51,7 @@ module.exports = {
           name: "Carlos Magno",
           email: "cm@cm",
           country_id: 2,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -51,6 +59,7 @@ module.exports = {
           name: "Maria Bonita",
           email: "mb@mb",
           country_id: 5,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -58,6 +67,7 @@ module.exports = {
           name: "Jack Jane",
           email: "jj@jj",
           country_id: 6,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -65,6 +75,7 @@ module.exports = {
           name: "Tony Montana",
           email: "tm@tm",
           country_id: 1,
+          password: bcrypt.hashSync("1234", SALT_ROUNDS),
           createdAt: new Date(),
           updatedAt: new Date(),
         },

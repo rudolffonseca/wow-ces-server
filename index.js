@@ -14,7 +14,7 @@ async function startApolloServer(typeDefs, resolvers) {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: { db },
+    context: ({ req }) => ({ req, db }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });
   app.use(cors());
