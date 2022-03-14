@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const jwtSecret = require("./secret").jwtSecret;
 
 const toJWT = (data) => {
-  return jwt.sign(data, jwtSecret);
+  return jwt.sign(data, jwtSecret, { expiresIn: "1h" });
 };
 
 const toData = (token) => {
