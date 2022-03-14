@@ -101,15 +101,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    countries: [Country]
-    customers: [Customer]
-    access_level: [Access_level]
-    associates: [Associate]
-    messages: [Message]
-    products: [Product]
-    topics: [Topic]
-    status: [Status]
-    tickets: [Ticket]
+    ticketsByCustomer(cust_id: ID): [Ticket]
   }
 
   type Mutation {
