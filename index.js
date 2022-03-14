@@ -4,6 +4,7 @@ const express = require("express");
 const http = require("http");
 const cors = require("cors");
 const countriesRouter = require("./routers/countries");
+const loginRouter = require("./routers/login");
 const authMiddleware = require("./auth/middleWare");
 
 const { typeDefs } = require("./graphql/schema");
@@ -22,6 +23,7 @@ async function startApolloServer(typeDefs, resolvers) {
   app.use(cors());
   app.use(express.json());
   app.use("/countries", countriesRouter);
+  app.use("/login", loginRouter);
   // app.use(authMiddleware);
   await server.start();
   server.applyMiddleware({ app });
