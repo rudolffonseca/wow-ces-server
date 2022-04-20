@@ -5,6 +5,7 @@ const http = require("http");
 const cors = require("cors");
 const countriesRouter = require("./routers/countries");
 const loginRouter = require("./routers/login");
+const signupRouter = require("./routers/signup");
 const authMiddleware = require("./auth/middleWare");
 
 const { typeDefs } = require("./graphql/schema");
@@ -23,12 +24,14 @@ async function startApolloServer(typeDefs, resolvers) {
   app.use(cors());
   app.use(express.json());
   app.use("/countries", countriesRouter);
-  app.use("/login", loginRouter);
-  // app.use(authMiddleware);
+  app.use("/auth", loginRouter);
+  app.use("/signup", signupRouter);
+  app.use(authMiddleware);
+
+  //TODO: implement the use of authentication middleware
   await server.start();
   server.applyMiddleware({ app });
-  app.listen(4000, console.log("on 4000"));
-  // await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
 }
 

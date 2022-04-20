@@ -1,4 +1,4 @@
-const Customer = require("../models").Customer;
+const Customer = require("../models/").Customer;
 const { toData } = require("./jwt");
 
 async function auth(req, res, next) {
@@ -15,7 +15,8 @@ async function auth(req, res, next) {
   try {
     const data = toData(auth[1]);
     //TODO:
-    const customer = await Customer.findByPk(data);
+    console.log(data.userId);
+    const customer = await Customer.findByPk(data.userId);
     if (!customer) {
       return res.status(404).send({ message: "User does not exist" });
     }

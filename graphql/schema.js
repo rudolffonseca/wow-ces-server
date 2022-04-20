@@ -58,6 +58,7 @@ const typeDefs = gql`
     message: String!
     read: Boolean
     Ticket: Ticket
+    authorCustomer: Boolean
     createdAt: Date
     updatedAt: Date
   }
@@ -102,6 +103,8 @@ const typeDefs = gql`
 
   type Query {
     ticketsByCustomer(cust_id: ID): [Ticket]
+    messagesByTicket(ticket_id: ID): [Message]
+    getTopics: [Topic]
   }
 
   type Mutation {
@@ -112,6 +115,18 @@ const typeDefs = gql`
       country_id: ID!
       password: String!
     ): SignUpPayload
+    addMessage(
+      message: String!
+      authorCust: Boolean
+      ticket_id: ID
+      read: Boolean
+    ): Message
+    newTicket(
+      customer_id: ID
+      product_id: ID
+      topic_id: ID
+      status_id: ID
+    ): Ticket
   }
 `;
 

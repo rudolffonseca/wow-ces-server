@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       message: DataTypes.TEXT,
       read: DataTypes.BOOLEAN,
+      authorCustomer: DataTypes.BOOLEAN,
     },
     {
       sequelize,

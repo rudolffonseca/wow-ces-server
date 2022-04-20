@@ -6,45 +6,29 @@ const { SALT_ROUNDS } = require("../config/constants");
 const resolvers = {
   Date: dateScalar,
   Query: {
-    // countries: async (root, args, { db }, info) => {
-    //   return db.Country.findAll({
-    //     include: db.Customer,
-    //   });
-    // },
-    ticketsByCustomer: async (root, args, { db }, info) => {
+    ticketsByCustomer: async (root, args, { db }) => {
       return db.Ticket.findAll({
         where: {
           customer_id: args.cust_id,
         },
-        include: [db.Message, db.Topic, db.Status],
+        include: [db.Message, db.Topic, db.Status, db.Product],
       });
+    },
+    messagesByTicket: async (root, args, { db }) => {
+      return db.Message.findAll({
+        where: {
+          ticket_id: args.ticket_id,
+        },
+        order: [["createdAt", "ASC"]],
+      });
+    },
+    getTopics: async (root, args, { db }) => {
+      return db.Topic.findAll();
     },
   },
 
   Mutation: {
-    login: async (root, args, { db }, info) => {
-      const customer = await db.Customer.findOne({
-        where: {
-          email: args.email,
-        },
-      });
-
-      if (!customer) {
-        throw new Error("User not found!");
-      }
-
-      const valid = bcrypt.compareSync(args.password, customer.password);
-
-      if (!valid) {
-        throw new Error("Invalid password!");
-      }
-
-      const token = toJWT(customer.id);
-
-      return { token, customer };
-    },
-
-    signup: async (root, args, { db }, infor) => {
+    signup: async (root, args, { db }) => {
       const userCheck = await db.Customer.findOne({
         where: {
           email: args.email,
@@ -63,6 +47,23 @@ const resolvers = {
         delete newCustomer.dataValues.password;
         return newCustomer;
       }
+    },
+    addMessage: async (root, args, { db }) => {
+      return db.Message.create({
+        message: args.message,
+        ticket_id: args.ticket_id,
+        read: args.read,
+        authorCustomer: args.authorCust,
+      });
+    },
+    newTicket: async (root, args, { db }, info) => {
+      const { customer_id, product_id, topic_id, status_id } = args;
+      return db.Ticket.create({
+        customer_id,
+        product_id,
+        topic_id,
+        status_id,
+      });
     },
   },
 };
