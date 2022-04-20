@@ -126,6 +126,8 @@ const typeDefs = gql`
       product_id: ID
       topic_id: ID
       status_id: ID
+      message: String
+      author: Boolean
     ): Ticket
   }
 `;

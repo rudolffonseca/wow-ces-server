@@ -23,7 +23,9 @@ const resolvers = {
       });
     },
     getTopics: async (root, args, { db }) => {
-      return db.Topic.findAll();
+      return db.Topic.findAll({
+        include: [db.Ticket],
+      });
     },
   },
 
@@ -57,13 +59,24 @@ const resolvers = {
       });
     },
     newTicket: async (root, args, { db }, info) => {
-      const { customer_id, product_id, topic_id, status_id } = args;
-      return db.Ticket.create({
+      const { customer_id, product_id, topic_id, status_id, message, author } =
+        args;
+      const newTicket = await db.Ticket.create({
         customer_id,
         product_id,
         topic_id,
         status_id,
       });
+
+      console.log("newTicket:", newTicket);
+
+      const newMessage = await db.Message.create({
+        message,
+        ticket_id: newTicket.id,
+        authorCustomer: author,
+      });
+
+      return newTicket;
     },
   },
 };
