@@ -105,6 +105,7 @@ const typeDefs = gql`
     ticketsByCustomer(cust_id: ID): [Ticket]
     messagesByTicket(ticket_id: ID): [Message]
     getTopics: [Topic]
+    getProducts: [Product]
   }
 
   type Mutation {
@@ -125,9 +126,7 @@ const typeDefs = gql`
       customer_id: ID
       product_id: ID
       topic_id: ID
-      status_id: ID
       message: String
-      author: Boolean
     ): Ticket
   }
 `;

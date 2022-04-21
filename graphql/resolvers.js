@@ -25,6 +25,12 @@ const resolvers = {
     getTopics: async (root, args, { db }) => {
       return db.Topic.findAll({
         include: [db.Ticket],
+        order: [["title", "ASC"]],
+      });
+    },
+    getProducts: async (root, args, { db }, info) => {
+      return db.Product.findAll({
+        order: [["name", "ASC"]],
       });
     },
   },
@@ -59,13 +65,11 @@ const resolvers = {
       });
     },
     newTicket: async (root, args, { db }, info) => {
-      const { customer_id, product_id, topic_id, status_id, message, author } =
-        args;
+      const { customer_id, product_id, topic_id, message } = args;
       const newTicket = await db.Ticket.create({
         customer_id,
         product_id,
         topic_id,
-        status_id,
       });
 
       console.log("newTicket:", newTicket);
@@ -73,7 +77,7 @@ const resolvers = {
       const newMessage = await db.Message.create({
         message,
         ticket_id: newTicket.id,
-        authorCustomer: author,
+        authorCustomer: true,
       });
 
       return newTicket;
